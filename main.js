@@ -1,100 +1,84 @@
-// items.forEach(function (item) {
-//   console.log(item.price)
-// })
+// Question 1
 
-//Question 1
-
-// let allPrices = items.map(function (item) {
-//   return item.price
-// })
-
-// console.log(allPrices)
-
-// average = allPrices.reduce(function (avg, value, _, { length }) {
-//   return avg + value / length
-// }, 0)
-// console.log(average)
-
-let prices = items.map(function (item) {
+const itemPrices = items.map(function (item) {
   return item.price
 })
-console.log(prices)
-average =
-  prices.reduce(function (a, b) {
-    return a + b
-  }) / prices.length
-console.log(average)
+const averagePrice = itemPrices.reduce((a, b) => a + b) / itemPrices.length
+document.querySelector(
+  "#answer1"
+).innerHTML = `The avergae price is $${averagePrice}`
 
 // Question 2
 
-const question2 = items
-  .map(function (items) {
-    if (items.price > 14 && items.price < 18) return items.title
+const costBetween = items.filter(function (item) {
+  if (item.price > 14 && item.price < 18) {
+    return true
+  }
+  return false
+})
+const costBetweenTitle = costBetween
+  .map(function (item) {
+    return `<li>${item.title}</li>`
   })
   .join("")
-
-console.log(question2)
+document.querySelector("#answer2").innerHTML = `${costBetweenTitle}`
 
 // Question 3
 
-const question3 = items
-  .map(function (items) {
-    if (items.currency_code == "GBP")
-      return items.title + " cost £" + items.price
-  })
-  .join("")
-
-console.log(question3)
+const gbpItem = items.filter(function (item) {
+  if (item.currency_code === "GBP") {
+    return true
+  }
+  return false
+})
+const gbpItemTitle = gbpItem.map(function (item) {
+  return `${item.title} $${item.price}`
+})
+document.querySelector("#answer3").innerHTML = `${gbpItemTitle}`
 
 // Question 4
 
-const question4 = items
-  .map(function (items) {
-    if (items.materials[0] == "wood") return items.title
+const woodItems = items.filter(function (item) {
+  if (item.materials.includes("wood")) {
+    return true
+  }
+  return false
+})
+const woodItemsTitle = woodItems
+  .map(function (item) {
+    return `<li>${item.title} is made of wood.</li>`
   })
   .join("")
-
-console.log(question4)
+document.querySelector("#answer4").innerHTML = `${woodItemsTitle}`
 
 // Question 5
 
-let highMatTitle = ""
-const highMats = items.map(function (mats) {
-  if (mats.materials[0] > mats.materials[7]) {
-    return mats.title
+const highMats = items.filter(function (item) {
+  if (item.materials.length >= 8) {
+    return true
   }
+  return false
 })
-
-console.log(highMats)
-
-// const question5Title = items
-//   .map(function (items) {
-//     if (items.materials > items.materials[8]) return items.title
-//   })
-//   .join("")
-
-// console.log(question5Title)
-
-// const question5Mats = items
-//   .map(function (items) {
-//     return items.materials
-//   })
-//   .join("")
-
-// console.log(question5Mats)
-
-// // const question5 = items
-// //   .map(function (items) {
-// //     if (items.materials > items.materials[8]) return items.title + " has "
-// //   })
-// //   .join("")
-
-// // console.log(question5)
+const highMatsTitle = highMats
+  .map(function (item) {
+    const matList = item.materials
+      .map(function (item) {
+        return `<li>${item}</li>`
+      })
+      .join("")
+    return `${item.title} has ${item.materials.length} materials: ${matList}`
+  })
+  .join("")
+document.querySelector("#answer5").innerHTML = `${highMatsTitle}`
 
 // Question 6
 
-const question6 = items.filter(function (item) {
-  return item.who_made === "i_did"
+const sellerMade = items.filter(function (item) {
+  if (item.who_made === "i_did") {
+    return true
+  }
+  return false
 })
-
-console.log(question6.length + " were made by the seller.")
+document.querySelector(
+  "#answer6"
+).innerHTML = `${sellerMade.length} were made by their sellers`
