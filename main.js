@@ -4,9 +4,11 @@ const itemPrices = items.map(function (item) {
   return item.price
 })
 const averagePrice = itemPrices.reduce((a, b) => a + b) / itemPrices.length
+const finalPrice = Math.round(averagePrice * 100) / 100
+
 document.querySelector(
   "#answer1"
-).innerHTML = `The avergae price is $${averagePrice}`
+).innerHTML = `The avergae price is $${finalPrice}`
 
 // Question 2
 
