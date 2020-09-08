@@ -13,7 +13,7 @@ document.querySelector(
 // Question 2
 
 const costBetween = items.filter(function (item) {
-  if (item.price > 14 && item.price < 18) {
+  if (item.price >= 14 && item.price <= 18) {
     return true
   }
   return false
